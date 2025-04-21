@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='winner.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}">
+    <title>Poll Winner - Voting App</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Voting App</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- Winner Container -->
+    <div class="winner-container">
+        <!-- Top Section: Image -->
+        <div class="image-container">
+            <img src="https://img.freepik.com/premium-vector/businessman-winner_111016-11.jpg" alt="Winner Illustration">
+        </div>
+
+        <!-- Bottom Section: Winner Information -->
+        <div class="details-container">
+            <h2>{{ poll.question }}</h2>
+            <h3>Winner: <span class="highlight">{{ winner }}</span></h3>
+            <div class="results">
+                <h4>Results Breakdown:</h4>
+                <ul>
+                    {% for option, count in results.items() %}
+                        <li><span class="option">{{ option }}</span> - <span class="count">{{ count }} votes</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <a href="{{ url_for('dashboard') }}" class="button">Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- JavaScript for Flash Messages -->
+    <script>
+        setTimeout(() => {
+            const flashMessages = document.querySelectorAll('.flash-messages');
+            flashMessages.forEach(message => {
+                message.style.display = 'none';
+            });
+        }, 3000); // Flash message timeout
+    </script>
+</body>
+</html>

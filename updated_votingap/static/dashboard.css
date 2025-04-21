@@ -1,0 +1,129 @@
+/* General Body Styling */
+body {
+    background-color: #f0f8ff;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #4682b4;
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.logout-btn {
+    background-color: #dc143c;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #ff4500;
+}
+
+/* Header Section */
+.header-section {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.header-section img {
+    max-width: 250px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-section h2 {
+    color: #4682b4;
+    margin: 10px 0;
+    font-size: 1.8rem;
+}
+
+/* Poll Containers */
+.polls-container {
+    margin: 30px auto;
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.poll {
+    background-color: #ffffff;
+    border: 1px solid #add8e6;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.poll h3 {
+    color: #4682b4;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.poll p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Buttons */
+.button {
+    background-color: #4682b4;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #5f9ea0;
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    background-color: #dc143c;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-top: 10px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #ff4500;
+}
+
+/* Create Poll Section */
+.create-poll-section {
+    text-align: center;
+    margin: 30px 0;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='create_poll.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}">
+    <title>Create Poll - Voting App</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Voting App</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header-section">
+        <h2>Create a New Poll</h2>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Section: Form -->
+        <div class="form-container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <form method="POST">
+                <label for="question">Poll Question</label>
+                <input type="text" name="question" id="question" placeholder="Enter poll question" required>
+
+                <label for="options">Poll Options</label>
+                <div id="options-container">
+                    <input type="text" name="options" placeholder="Option 1" required>
+                    <input type="text" name="options" placeholder="Option 2" required>
+                    <button type="button" id="add-option-btn" class="button">Add More Options</button>
+                </div>
+
+                <label for="timer">Set Timer (Minutes)</label>
+                <input type="number" name="timer" id="timer" placeholder="e.g. 10" required min="1">
+
+                <button type="submit" class="button">Create Poll</button>
+            </form>
+        </div>
+
+        <!-- Right Section: Image -->
+        <div class="image-container">
+            <img src="https://img.freepik.com/free-vector/users-group-three_78370-6955.jpg" alt="Create Poll Illustration">
+        </div>
+    </div>
+
+    <!-- JavaScript for Adding Dynamic Options -->
+    <script>
+        document.getElementById('add-option-btn').addEventListener('click', function () {
+            const optionsContainer = document.getElementById('options-container');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'options';
+            input.placeholder = `Option ${optionsContainer.querySelectorAll('input').length + 1}`;
+            input.required = true;
+            optionsContainer.insertBefore(input, this);
+        });
+
+        setTimeout(() => {
+            const flashMessages = document.querySelectorAll('.flash-messages');
+            flashMessages.forEach(message => {
+                message.style.display = 'none';
+            });
+        }, 3000); // Flash message timeout
+    </script>
+</body>
+</html>

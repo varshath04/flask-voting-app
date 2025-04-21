@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}">
+    <title>Dashboard - Voting App</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Voting App</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- Top Image and Welcome Message -->
+    <div class="header-section">
+        <img src="https://img.freepik.com/free-vector/international-day-democracy_23-2148608691.jpg?t=st=1744646423~exp=1744650023~hmac=88084d34644b69619e74dcd941dd88662b13d8e98dc624410b6a84d5ef06c663&w=826" alt="Dashboard Illustration">
+        <h2>Welcome, {{ username }}!</h2>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Poll Containers -->
+    <div class="polls-container">
+        {% for poll in polls %}
+        <div class="poll">
+            <h3>{{ poll.question }}</h3>
+            {% if poll.expired %}
+                <p><strong>Status:</strong> Poll Ended</p>
+                <p><strong>Winner:</strong> {{ poll.winner }}</p>
+                <a href="{{ url_for('winner_page', poll_id=poll['_id']) }}" class="button">View Winner</a>
+            {% else %}
+                <p><strong>Status:</strong> Ongoing</p>
+                <p><strong>Time Remaining:</strong> {{ poll.remaining }}</p>
+                <a href="{{ url_for('vote', poll_id=poll['_id']) }}" class="button">Vote</a>
+            {% endif %}
+            {% if poll.creator == username %}
+                <a href="{{ url_for('delete_poll', poll_id=poll['_id']) }}" class="delete-btn">Delete</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Create Poll Button -->
+    <div class="create-poll-section">
+        <a href="{{ url_for('create_poll') }}" class="button">Create New Poll</a>
+    </div>
+
+    <!-- JavaScript for Flash Messages -->
+    <script>
+        setTimeout(() => {
+            const flashMessages = document.querySelectorAll('.flash-messages');
+            flashMessages.forEach(message => {
+                message.style.display = 'none';
+            });
+        }, 3000); // 3-second timeout
+    </script>
+</body>
+</html>

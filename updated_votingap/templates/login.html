@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}">
+    <title>Login - Voting App</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Voting App</h1>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Section: Image -->
+        <div class="image-container">
+            <img src="https://images.pexels.com/photos/4669113/pexels-photo-4669113.jpeg?auto=compress&cs=tinysrgb&w=600">
+        </div>
+
+        <!-- Right Section: Login Form -->
+        <div class="container animated-container">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <h2>Login</h2>
+            <form method="POST">
+                <input type="text" name="username" placeholder="Username" required><br>
+                <input type="password" name="password" placeholder="Password" required><br>
+                <button type="submit">Login</button>
+            </form>
+            <p>New user? <a href="{{ url_for('register') }}">Register</a></p>
+        </div>
+    </div>
+
+    <!-- Animation Script -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.querySelector(".animated-container");
+            container.style.opacity = 0;
+            container.style.transform = "translateX(50px)";
+            setTimeout(() => {
+                container.style.transition = "all 1s ease";
+                container.style.opacity = 1;
+                container.style.transform = "translateX(0)";
+            }, 100);
+        });
+
+        setTimeout(() => {
+            const flashMessages = document.querySelectorAll('.flash-messages');
+            flashMessages.forEach(message => {
+                message.style.display = 'none';
+            });
+        }, 3000);
+    </script>
+</body>
+</html>

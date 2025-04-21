@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vote.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}">
+    <title>Vote - Voting App</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Voting App</h1>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- Top Section: Poll Question -->
+    <div class="header-section">
+        <h2>{{ poll.question }}</h2>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Poll Options Form -->
+    <div class="form-container">
+        <form method="POST">
+            {% for option in poll.options %}
+                <label>
+                    <input type="radio" name="option" value="{{ option }}" required> {{ option }}
+                </label><br>
+            {% endfor %}
+            <button type="submit" class="button">Submit Vote</button>
+        </form>
+    </div>
+
+    <!-- JavaScript for Flash Messages -->
+    <script>
+        setTimeout(() => {
+            const flashMessages = document.querySelectorAll('.flash-messages');
+            flashMessages.forEach(message => {
+                message.style.display = 'none';
+            });
+        }, 3000); // Flash message timeout
+    </script>
+</body>
+</html>
