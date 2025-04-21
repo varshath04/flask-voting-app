@@ -1,0 +1,5 @@
+Werkzeug
+flask
+pymongo
+dnspython
+bcrypt
